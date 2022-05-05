@@ -77,7 +77,7 @@
                                                 <div class="pro-qty"><input type="text" value="1"></div>
                                             </div>
                                             <div class="action_link">
-                                                <a class="buy-btn" id="productidBtn" value="{{product.id}}" href="#">add to cart<i class="fa fa-shopping-cart"></i></a>
+                                                <button class="buy-btn" id="productidBtn" value="{{product.id}}" href="">add to cart<i class="fa fa-shopping-cart"></i></button>
                                             </div>
                                         </div>
                                         <div class="useful-links mt-20">
@@ -752,29 +752,5 @@
         <!-- product details wrapper end -->
 
 
-        <script>
-            $(document).on('click','#productidBtn',function(e){
-                // detect btn when clicked
-                e.preventDefault();
-                // prevent btn to fire off unless when clicked
-                $.ajax({
-                    // ajax request
-                    type:'POST',
-                    url:'{% url "cart:cart_add" %}',
-                    data:{
-                        productid:$('#productidBtn').val(),
-                        // collect the product id when btn is clicked
-                        csrfmiddlewaretoken:"{{csrf_token}}",
-                        action:'post'
-                    }, 
-                    success:function (jjson){
-                       
-                    },
-                    error: function(xhr,errmsg,err){}
-                });
-
-            })
-
-        </script>
 
 {% endblock %}

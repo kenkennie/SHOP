@@ -12,7 +12,7 @@ class Cart():
         # skey is the session name (you can create many sessions, so its importance to name sessions)
         if 'skey' not in request.session:
             # check if user has a sesson
-            basket= self.sess['skey']={}
+            crt= self.sess['skey']={}
             # if there is no session, create and save in basket
         self.basket = crt
         # get the created session and save in crt
@@ -20,7 +20,13 @@ class Cart():
 
     def add(self, product):
         '''
-            add data to session
+            add data to session 
+            product is passed from view
         '''
         product_id=product.id
         # get product.id(from product) and save to product_id
+        if product_id not in self.basket:
+            # check if product id exists in session.crt
+            self.basket[product_id] = {'price':int(product.price)}
+            # if it doen't exist, add price
+        self.sess.modified= True

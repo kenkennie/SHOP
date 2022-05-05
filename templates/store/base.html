@@ -14,7 +14,7 @@
     <!-- Site title -->
     <title>{% block title %} My.. shop {% endblock %}</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'assets/img/favicon.ico' %}" type="image/x-icon" />
     <!-- Bootstrap CSS -->
     <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Font-Awesome CSS -->
@@ -248,13 +248,11 @@
 
 
 
-
-
       
     <!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
     <script src="{% static 'assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
     <!-- Jquery Min Js -->
-    <script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
     <!-- Popper Min Js -->
     <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
     <!-- Bootstrap Min Js -->
@@ -267,5 +265,39 @@
     <script src="{% static 'assets/js/main.js' %}"></script>
     <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
     <script src="{% static 'assets/js/switcher.js' %}"></script>
+
+    
+<script>
+
+    $(document).on('click','#productidBtn',function(e){
+      // detect btn when clicked
+      e.preventDefault();
+      
+      // prevent btn to fire off unless when clicked
+      $.ajax({
+          // ajax request
+          type:'POST',
+          url:'{% url "cart:cart_add" %}',
+          
+          data:{
+              productid: $('#productidBtn').val(),
+              // collect the product id when btn is clicked
+              csrfmiddlewaretoken:"{{csrf_token}}",
+              action:'post'
+          }, 
+          
+          
+          success:function (json){
+              
+          },
+          error: function(xhr,errmsg,err){}
+      });
+
+      
+  })
+
+</script>
+
+
 </body>
 </html>
