@@ -1,0 +1,271 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+
+    <!-- Site title -->
+    <title>{% block title %} My.. shop {% endblock %}</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font-Awesome CSS -->
+    <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- helper class css -->
+    <link href="{% static 'assets/css/helper.min.css' %}" rel="stylesheet">
+    <!-- Plugins CSS -->
+    <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/skin-default.css' %}" rel="stylesheet" id="galio-skin">
+</head>
+
+<body>
+        <!-- header area start -->
+        <header>
+
+          <!-- header top start -->
+          <div class="header-top-area bg-gray text-center text-md-left">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-6 col-md-5">
+                          <div class="header-call-action">
+                              <a href="#">
+                                  <i class="fa fa-envelope"></i>
+                                  info@website.com
+                              </a>
+                              <a href="#">
+                                  <i class="fa fa-phone"></i>
+                                  0123456789
+                              </a>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md-7">
+                          <div class="header-top-right float-md-right float-none">
+                              <nav>
+                                  <ul>
+                                      <li>
+                                          <div class="dropdown header-top-dropdown">
+                                              <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
+                                                  aria-haspopup="true" aria-expanded="false">
+                                                  my account
+                                                  <i class="fa fa-angle-down"></i>
+                                              </a>
+                                              <div class="dropdown-menu" aria-labelledby="myaccount">
+                                                  <a class="dropdown-item" href="my-account.html">my account</a>
+                                                  <a class="dropdown-item" href="login-register.html"> login</a>
+                                                  <a class="dropdown-item" href="login-register.html">register</a>
+                                              </div>
+                                          </div>
+                                      </li>
+                                      <li>
+                                          <a href="#">my wishlist</a>
+                                      </li>
+                                      <li>
+                                          <a href="#">my cart</a>
+                                      </li>
+                                      <li>
+                                          <a href="#">checkout</a>
+                                      </li>
+                                  </ul>
+                              </nav>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- header top end -->
+
+          <!-- header middle start -->
+          <div class="header-middle-area pt-20 pb-20">
+              <div class="container">
+                  <div class="row align-items-center">
+                      <div class="col-lg-3">
+                          <div class="brand-logo">
+                              <a href="/">
+                                  <img src="{% static 'assets/img/logo/logo.png' %}" alt="brand logo">
+                              </a>
+                          </div>
+                      </div> <!-- end logo area -->
+                      <div class="col-lg-9">
+                          <div class="header-middle-right">
+                              <div class="header-middle-shipping mb-20">
+                                  <div class="single-block-shipping">
+                                      <div class="shipping-icon">
+                                          <i class="fa fa-clock-o"></i>
+                                      </div>
+                                      <div class="shipping-content">
+                                          <h5>Working time</h5>
+                                          <span>Mon- Sun: 8.00 - 18.00</span>
+                                      </div>
+                                  </div> <!-- end single shipping -->
+                                  <div class="single-block-shipping">
+                                      <div class="shipping-icon">
+                                          <i class="fa fa-truck"></i>
+                                      </div>
+                                      <div class="shipping-content">
+                                          <h5>free shipping</h5>
+                                          <span>On order over $199</span>
+                                      </div>
+                                  </div> <!-- end single shipping -->
+                                  <div class="single-block-shipping">
+                                      <div class="shipping-icon">
+                                          <i class="fa fa-money"></i>
+                                      </div>
+                                      <div class="shipping-content">
+                                          <h5>money back 100%</h5>
+                                          <span>Within 30 Days after delivery</span>
+                                      </div>
+                                  </div> <!-- end single shipping -->
+                              </div>
+                              <div class="header-middle-block">
+                                  <div class="header-middle-searchbox">
+                                      <input type="text" placeholder="Search...">
+                                      <button class="search-btn"><i class="fa fa-search"></i></button>
+                                  </div>
+                                  <div class="header-mini-cart">
+                                      <div class="mini-cart-btn">
+                                          <i class="fa fa-shopping-cart"></i>
+                                          <span class="cart-notification">2</span>
+                                      </div>
+                                      <div class="cart-total-price">
+                                          <span>total</span>
+                                          $50.00
+                                      </div>
+                                      <ul class="cart-list">
+                                          <li>
+                                              <div class="cart-img">
+                                                  <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg"
+                                                          alt=""></a>
+                                              </div>
+                                              <div class="cart-info">
+                                                  <h4><a href="product-details.html">simple product 09</a></h4>
+                                                  <span>$60.00</span>
+                                              </div>
+                                              <div class="del-icon">
+                                                  <i class="fa fa-times"></i>
+                                              </div>
+                                          </li>
+                                          <li>
+                                              <div class="cart-img">
+                                                  <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg"
+                                                          alt=""></a>
+                                              </div>
+                                              <div class="cart-info">
+                                                  <h4><a href="product-details.html">virtual product 10</a></h4>
+                                                  <span>$50.00</span>
+                                              </div>
+                                              <div class="del-icon">
+                                                  <i class="fa fa-times"></i>
+                                              </div>
+                                          </li>
+                                          <li class="mini-cart-price">
+                                              <span class="subtotal">subtotal : </span>
+                                              <span class="subtotal-price">$88.66</span>
+                                          </li>
+                                          <li class="checkout-btn">
+                                              <a href="#">checkout</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- header middle end -->
+
+          <!-- main menu area start -->
+          <div class="main-header-wrapper bdr-bottom1">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="main-header-inner">
+                              <div class="category-toggle-wrap">
+                                  <div class="category-toggle">
+                                      category
+                                      <div class="cat-icon">
+                                          <i class="fa fa-angle-down"></i>
+                                      </div>
+                                  </div>
+                                  <nav class="category-menu hm-1">
+                                      <ul>
+                                        {% for c in categories %}
+                                          <li><a href="{{c.get_absolute_url}}"><i class="fa fa-desktop"></i>
+                                                 {{c.name | title}}</a></li>
+                                        {% endfor %}
+                                         
+                                      </ul>
+                                  </nav>
+                              </div>
+
+                              <div class="main-menu">
+                                  <nav id="mobile-menu">
+                                      <ul>
+                                          <li class="active"><a href="/"><i class="fa fa-home"></i>Home <i class="fa fa-angle-down"></i></a></li>
+                                          <li class="static"><a href="#">pages </a>
+                                              
+                                          </li>
+                                          <li><a href="#">shop </a>
+                                             
+                                          </li>
+                                          <li><a href="#">Blog</a>
+                                             
+                                          </li>
+                                          <li><a href="contact-us.html">Contact us</a></li>
+                                      </ul>
+                                  </nav>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12 d-block d-lg-none">
+                          <div class="mobile-menu"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- main menu area end -->
+
+      </header>
+      <!-- header area end -->
+
+
+
+
+
+      <!--content-->
+        {% block content %} {% endblock %}
+      <!--end content-->
+
+
+
+
+
+      
+    <!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+    <script src="{% static 'assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <!-- Jquery Min Js -->
+    <script src="{% static 'assets/js/vendor/jquery-3.3.1.min.js' %}"></script>
+    <!-- Popper Min Js -->
+    <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
+    <!-- Bootstrap Min Js -->
+    <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+    <!-- Plugins Js-->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <!-- Ajax Mail Js -->
+    <script src="{% static 'assets/js/ajax-mail.js' %}"></script>
+    <!-- Active Js -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
+    <script src="{% static 'assets/js/switcher.js' %}"></script>
+</body>
+</html>
