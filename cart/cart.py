@@ -12,7 +12,7 @@ class Cart():
         # skey is the session name (you can create many sessions, so its importance to name sessions)
         if 'skey' not in request.session:
             # check if user has a sesson
-            basket= self.sess['skey']={"nuasd":1231231}
+            basket= self.sess['skey']={}
             # if there is no session, create and save in basket
         self.basket = crt
         # get the created session and save in crt
