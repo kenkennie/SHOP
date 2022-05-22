@@ -31,7 +31,7 @@ class Cart():
             # if it doen't exist, add price
         self.sess.modified= True
 
-    def __init__ (self):
+    def __iter__(self):
         '''
         collect the product_id in the session data to query the database and 
         return products
@@ -46,9 +46,14 @@ class Cart():
             # loop through data from database
             # each product that is looped it is saved in variable product
             cart[str(product.id)]['product']= prdcts 
-            
-            
-            # add moreda
+
+
+            # add more data
+            for item in basket.values():
+                item['price'] = Decimal(item['price'])
+                item['total_price'] = item['price']*item['ĩty']
+                yield item
+
     
     def __len__(self):
         '''

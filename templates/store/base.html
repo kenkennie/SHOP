@@ -134,7 +134,17 @@
                                   <div class="header-mini-cart">
                                       <div class="mini-cart-btn">
                                           <i class="fa fa-shopping-cart"></i>
-                                          <span class="cart-notification">2</span>
+                                          
+                                        {% with total_qty=cart|length%}
+                                                <span class="cart-notification" id="cartQty">
+                                                    {% if total_qty > 0 %}
+                                                            {{ total_qty }}
+                                                    {% else %}
+                                                            0
+                                                    {% endif %}
+                                                </span>
+                                            {% endwith %}
+                                         
                                       </div>
                                       <div class="cart-total-price">
                                           <span>total</span>
@@ -172,7 +182,7 @@
                                               <span class="subtotal-price">$88.66</span>
                                           </li>
                                           <li class="checkout-btn">
-                                              <a href="#">checkout</a>
+                                              <a href="">checkout</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -272,6 +282,7 @@
     $(document).on('click','#productidBtn',function(e){
       // detect btn when clicked
       e.preventDefault();
+     
       
       // prevent btn to fire off unless when clicked
       $.ajax({
@@ -281,6 +292,7 @@
           
           data:{
               productid: $('#productidBtn').val(),
+              productQty :$('#select').val(),
               // collect the product id when btn is clicked
               csrfmiddlewaretoken:"{{csrf_token}}",
               action:'post'
@@ -288,6 +300,9 @@
           
           
           success:function (json){
+              document.getElementById("cartQty").innerHTML =json.Qty
+              //  get selected quantity and update cart quantity in the frontend
+              
               
           },
           error: function(xhr,errmsg,err){}
