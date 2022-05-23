@@ -41,21 +41,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {% for item in cart %}
-                                    {%with product = item.product %}
+
                                         <tr>
-                                            <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="{{ product.image.url }}"
+                                            {% for item in cart %}
+                                                    {% with prduct=item.product%}
+                                            <td class="pro-thumbnail"><a href="{{prduct.get_absolute_url}}"><img class="img-fluid" src="{{ prduct.image.url }}"
                                                                                         alt="Product"/></a></td>
-                                            <td class="pro-title"><a href="#">{{ product.title }}</a></td>
-                                            <td class="pro-price"><span>{{ product.price }}</span></td>
+                                            <td class="pro-title"><a href="{{prduct.get_absolute_url}}">{{ prduct.title }} </a></td>
+                                            <td class="pro-price"><span>{{ prduct.price }}</span></td>
                                             <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="1"></div>
+                                                <div class="pro-qty"><input type="text" value="{{item.Qty}}"></div>
                                             </td>
-                                            <td class="pro-subtotal"><span>$295.00</span></td>
-                                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                            <td class="pro-subtotal"><span>Ksh{{ item.total_price }}</span></td>
+                                            <td class="pro-remove"><button class="btn btn-danger" id="deleteBtn" value="{{product.id}}" href="#"><i class="fa fa-trash-o"></i></button></td>
                                         </tr>
-                                        {% endwith %}
+                                 {% endwith %}
                                     {% endfor %}
+
                                 
                                 </tbody>
                             </table>
@@ -88,13 +90,10 @@
                                             <td>Sub Total</td>
                                             <td>$230</td>
                                         </tr>
-                                        <tr>
-                                            <td>Shipping</td>
-                                            <td>$70</td>
-                                        </tr>
+
                                         <tr class="total">
                                             <td>Total</td>
-                                            <td class="total-amount">$300</td>
+                                            <td class="total-amount">Ksh {{cart.get_total_price}}</td>
                                         </tr>
                                     </table>
                                 </div>

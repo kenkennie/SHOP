@@ -182,7 +182,7 @@
                                               <span class="subtotal-price">$88.66</span>
                                           </li>
                                           <li class="checkout-btn">
-                                              <a href="">checkout</a>
+                                              <a href="{% url "cart:cart_summary" %}">checkout</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -309,6 +309,38 @@
       });
 
       
+  })
+
+
+
+    $(document).on('click','#deleteBtn',function(e){
+      // detect btn when clicked
+      e.preventDefault();
+
+
+      // prevent btn to fire off unless when clicked
+      $.ajax({
+          // ajax request
+          type:'POST',
+          url:'{% url "cart:cart_delete" %}',
+
+          data:{
+              productid: $('#productidBtn').val(),
+
+              // collect the product id when btn is clicked
+              csrfmiddlewaretoken:"{{csrf_token}}",
+              action:'delete'
+          },
+
+
+          success:function (json){
+
+
+          },
+          error: function(xhr,errmsg,err){}
+      });
+
+
   })
 
 </script>
