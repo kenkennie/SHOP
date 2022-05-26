@@ -307,13 +307,14 @@
           },
           error: function(xhr,errmsg,err){}
       });
-
+console.log("Hello world!");
       
   })
 
 
 
-    $(document).on('click','#deleteBtn',function(e){
+
+  $(document).on('click','.deleteBtn',function(e){
       // detect btn when clicked
       e.preventDefault();
 
@@ -324,13 +325,16 @@
           type:'POST',
           url:'{% url "cart:cart_delete" %}',
 
+
           data:{
-              productid: $('#productidBtn').val(),
+              productid: $(this).data('index),
+
 
               // collect the product id when btn is clicked
               csrfmiddlewaretoken:"{{csrf_token}}",
-              action:'delete'
+              action:'del'
           },
+
 
 
           success:function (json){
@@ -342,6 +346,9 @@
 
 
   })
+
+
+
 
 </script>
 

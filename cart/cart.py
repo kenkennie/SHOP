@@ -58,8 +58,6 @@ class Cart():
             item['total_price'] = Decimal(item['price'] * item['Qty'])
             yield item
 
-
-
     def __len__(self):
         '''
         get the basket data and count the quantity of all products
@@ -67,13 +65,20 @@ class Cart():
         return sum(prdct['Qty'] for prdct in self.basket.values())
         # iterate over the product quantity,calculate values of all products tha have quantity
 
-
-
-    def get_total_price (self):
+    def get_total_price(self):
         return sum(Decimal(item['price']) * item['Qty'] for item in self.basket.values())
 
         """
             Get total price
         """
 
+    def delete(self, productId):
+        ''' delete product from session data'''
+        product_id = str(productId)
+        print(product_id)
+        if product_id in self.basket:
+            del self.basket[product_id]
+            self.save()
 
+    def save(self):
+        self.sess.modified = True

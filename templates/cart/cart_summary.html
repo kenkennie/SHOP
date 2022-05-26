@@ -53,7 +53,7 @@
                                                 <div class="pro-qty"><input type="text" value="{{item.Qty}}"></div>
                                             </td>
                                             <td class="pro-subtotal"><span>Ksh{{ item.total_price }}</span></td>
-                                            <td class="pro-remove"><button class="btn btn-danger" id="deleteBtn" value="{{product.id}}" href="#"><i class="fa fa-trash-o"></i></button></td>
+                                            <td class="pro-remove"><button class="btn btn-danger deleteBtn" data-index="{{prduct.id}}" href="#"><i class="fa fa-trash-o "></i></button></td>
                                         </tr>
                                  {% endwith %}
                                     {% endfor %}
