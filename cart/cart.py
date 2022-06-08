@@ -28,12 +28,14 @@ class Cart():
             add data to session 
             product,product_Qty is passed from view
         '''
-        product_id = product.id
+        product_id = str(product.id)
         # get product.id(from product) and save to product_id
         if product_id not in self.basket:
             # check if product id exists in session.crt
             self.basket[product_id] = {'price': int(product.price), 'Qty': int(Qty)}
-            # if it doen't exist, add price
+        else:
+            # if it doesn't exist, add price
+            self.basket[product_id]= {'price':str(product.price), 'Qty': Qty}
         self.sess.modified = True
 
     def __iter__(self):
@@ -65,12 +67,14 @@ class Cart():
         return sum(prdct['Qty'] for prdct in self.basket.values())
         # iterate over the product quantity,calculate values of all products tha have quantity
 
+
+
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['Qty'] for item in self.basket.values())
 
         """
-            Get total price
+                Get total price
         """
+        return sum(Decimal(item['price']) * item['Qty'] for item in self.basket.values())
 
     def delete(self, productId):
         ''' delete product from session data'''
@@ -80,5 +84,19 @@ class Cart():
             del self.basket[product_id]
             self.save()
 
+    def update(self, product, qty):
+        product_id = str(product)
+
+        if product_id in self.basket:
+
+            self.basket[product_id]['Qty'] = qty
+
+        self.save()
+
     def save(self):
         self.sess.modified = True
+
+
+
+
+
