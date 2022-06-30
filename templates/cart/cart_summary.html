@@ -37,32 +37,36 @@
                                     <th class="pro-price">Price</th>
                                     <th class="pro-quantity">Quantity</th>
                                     <th class="pro-subtotal">Total</th>
+                                    <th class="pro-Update">Update</th>
                                     <th class="pro-remove">Remove</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    {% for item in cart %}
+                                       {% with prduct=item.product%}
+                                        <tr class="product-item" data-index="{{prduct.id}}">
 
-                                        <tr>
-                                            {% for item in cart %}
-                                                    {% with prduct=item.product%}
-                                            <td class="pro-thumbnail"><a href="{{prduct.get_absolute_url}}"><img class="img-fluid" src="{{ prduct.image.url }}"
+                                            <td class="pro-thumbnail product.item"  ><a href="{{prduct.get_absolute_url}}"><img class="img-fluid" src="{{ prduct.image.url }}"
                                                                                         alt="Product"/></a></td>
                                             <td class="pro-title"><a href="{{prduct.get_absolute_url}}">{{ prduct.title }} </a></td>
                                             <td class="pro-price"><span>{{ prduct.price }}</span></td>
                                             <td class="pro-quantity">
-                                                <div class="pro-qty"><input type="text" value="{{item.Qty}}"></div>
+                                                <div class="pro-qty"><input type="text" value="{{item.Qty}}" id="select{{prduct.id}}" ></div>
                                             </td>
                                             <td class="pro-subtotal"><span>Ksh{{ item.total_price }}</span></td>
-                                            <td class="pro-remove"><button class="btn btn-danger" id="deleteBtn" value="{{product.id}}" href="#"><i class="fa fa-trash-o"></i></button></td>
+                                            <td class="pro-update"><button class="btn btn-info updateBtn" data-index="{{prduct.id}}" ><i class="fa fa-refresh "></i></button></td>
+                                            <td class="pro-remove"><button class="btn btn-danger deleteBtn" id="deleteBtn" data-index="{{prduct.id}}" ><i class="fa fa-trash-o "></i></button></td>
+
                                         </tr>
                                  {% endwith %}
                                     {% endfor %}
 
-                                
+
                                 </tbody>
                             </table>
                         </div>
-        
+
                         <!-- Cart Update Option -->
                         <div class="cart-update-option d-block d-md-flex justify-content-between">
                             <div class="apply-coupon-wrapper">
@@ -77,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="row">
                     <div class="col-lg-5 ml-auto">
                         <!-- Cart Calculation Area -->
@@ -86,14 +90,11 @@
                                 <h3>Cart Totals</h3>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tr>
-                                            <td>Sub Total</td>
-                                            <td>$230</td>
-                                        </tr>
+
 
                                         <tr class="total">
                                             <td>Total</td>
-                                            <td class="total-amount">Ksh {{cart.get_total_price}}</td>
+                                            <td class="total-amount" id="totalId2">Ksh {{cart.get_total_price}}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -105,4 +106,8 @@
             </div>
         </div>
         <!-- cart main wrapper end -->
+
+
+
 {%endblock%}
+
