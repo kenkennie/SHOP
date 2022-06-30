@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&4k+hh_+xxqzkeaen-b-z58o5^8!p7lp!s4mq%^*f^)sxz(o$%
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['kennie-mega.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['the-mega-shop.herokuapp.com','127.0.0.1']
 
 # Application definition
 
