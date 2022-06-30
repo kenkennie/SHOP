@@ -54,15 +54,17 @@
                                   <ul>
                                       <li>
                                           <div class="dropdown header-top-dropdown">
+                                              {%  if user.is_authenticated %}
                                               <a class="dropdown-toggle" id="myaccount" data-toggle="dropdown"
                                                   aria-haspopup="true" aria-expanded="false">
                                                   my account
                                                   <i class="fa fa-angle-down"></i>
                                               </a>
                                               <div class="dropdown-menu" aria-labelledby="myaccount">
-                                                  <a class="dropdown-item" href="my-account.html">my account</a>
-                                                  <a class="dropdown-item" href="login-register.html"> login</a>
-                                                  <a class="dropdown-item" href="login-register.html">register</a>
+                                                  <a class="dropdown-item" href="{% url 'account:dashboard' %}">my account</a>
+                                                  <a class="dropdown-item" href="{% url 'account:logout' %}"> logout</a>
+
+
                                               </div>
                                           </div>
                                       </li>
@@ -75,6 +77,10 @@
                                       <li>
                                           <a href="#">checkout</a>
                                       </li>
+                                       {% else %}
+                                                 <li><a class="dropdown-item" href="{% url 'account:login' %}">Login</a></li>
+                                                  <li><a class="dropdown-item" href="{% url 'account:register' %}">register</a></li>
+                                      {% endif %}
                                   </ul>
                               </nav>
                           </div>
@@ -146,43 +152,33 @@
                                             {% endwith %}
                                          
                                       </div>
-                                      <div class="cart-total-price">
-                                          <span>total</span>
-                                          $50.00
+                                      <div class="cart-total-price" id="totalId">
+                                          <span >total:ksh <strong>{{cart.get_total_price}} </strong></span>
+
                                       </div>
-                                      <ul class="cart-list">
-                                          <li>
+                                               <ul class="cart-list" >
+
+                                          {% for item in cart %}
+                                            {% with prduct=item.product%}
+                                          <li data-index="{{prduct.id}}">
                                               <div class="cart-img">
-                                                  <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg"
+                                                  <a href="{{prduct.get_absolute_url}}"><img src="{{ prduct.image.url }}"
                                                           alt=""></a>
                                               </div>
                                               <div class="cart-info">
-                                                  <h4><a href="product-details.html">simple product 09</a></h4>
-                                                  <span>$60.00</span>
+                                                  <h4><a href="{{prduct.get_absolute_url}}">{{ prduct.title }} </a></h4>
+                                                  <span>{{item.Qty}}</span>
+                                                  <span>Ksh{{ item.total_price }}</span>
                                               </div>
                                               <div class="del-icon">
-                                                  <i class="fa fa-times"></i>
+                                                  <i class="fa fa-times deleteBtn" id="deleteBtn2" data-index="{{prduct.id}}"></i>
                                               </div>
                                           </li>
-                                          <li>
-                                              <div class="cart-img">
-                                                  <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg"
-                                                          alt=""></a>
-                                              </div>
-                                              <div class="cart-info">
-                                                  <h4><a href="product-details.html">virtual product 10</a></h4>
-                                                  <span>$50.00</span>
-                                              </div>
-                                              <div class="del-icon">
-                                                  <i class="fa fa-times"></i>
-                                              </div>
-                                          </li>
-                                          <li class="mini-cart-price">
-                                              <span class="subtotal">subtotal : </span>
-                                              <span class="subtotal-price">$88.66</span>
-                                          </li>
+
+                            {% endwith %}
+                                    {% endfor %}
                                           <li class="checkout-btn">
-                                              <a href="{% url "cart:cart_summary" %}">checkout</a>
+                                              <a href="{% url 'cart:cart_summary' %}">checkout</a>
                                           </li>
                                       </ul>
                                   </div>
@@ -276,47 +272,52 @@
     <!-- Switcher JS [Please Remove this when Choose your Final Projct] -->
     <script src="{% static 'assets/js/switcher.js' %}"></script>
 
-    
 <script>
+
+
 
     $(document).on('click','#productidBtn',function(e){
       // detect btn when clicked
       e.preventDefault();
-     
-      
+
+
       // prevent btn to fire off unless when clicked
       $.ajax({
           // ajax request
           type:'POST',
           url:'{% url "cart:cart_add" %}',
-          
+
           data:{
               productid: $('#productidBtn').val(),
               productQty :$('#select').val(),
               // collect the product id when btn is clicked
               csrfmiddlewaretoken:"{{csrf_token}}",
               action:'post'
-          }, 
-          
-          
+          },
+
+
           success:function (json){
               document.getElementById("cartQty").innerHTML =json.Qty
+              document.getElementById("totalId").innerHTML =json.total
               //  get selected quantity and update cart quantity in the frontend
-              
-              
+
+
           },
           error: function(xhr,errmsg,err){}
       });
-console.log("Hello world!");
-      
-  })
+
+
+  });
+
+</script>
 
 
 
-
-  $(document).on('click','.deleteBtn',function(e){
+<script>
+  $(document).on('click','.deleteBtn','.deleteBtn2',function(e){
       // detect btn when clicked
       e.preventDefault();
+      var prodid = $(this).data('index');
 
 
       // prevent btn to fire off unless when clicked
@@ -327,7 +328,7 @@ console.log("Hello world!");
 
 
           data:{
-              productid: $(this).data('index),
+              productid: $(this).data('index'),
 
 
               // collect the product id when btn is clicked
@@ -338,15 +339,56 @@ console.log("Hello world!");
 
 
           success:function (json){
+              $('.product-item[data-index="'+ prodid +'"]').remove();
+              document.getElementById("cartQty").innerHTML = json.Qty
+              document.getElementById("totalId").innerHTML = json.total
 
 
           },
           error: function(xhr,errmsg,err){}
       });
 
-
   })
 
+
+// update
+ $(document).on('click','.updateBtn',function(e){
+      // detect btn when clicked
+      e.preventDefault();
+
+      var prodid = $(this).data('index');
+
+
+      // prevent btn to fire off unless when clicked
+      $.ajax({
+          // ajax request
+          type:'POST',
+          url:'{% url "cart:cart_update" %}',
+
+
+          data:{
+              productid: $(this).data('index'),
+              productQty :$('#select' + prodid ).val(),
+
+              // collect the product id when btn is clicked
+              csrfmiddlewaretoken:"{{csrf_token}}",
+              action:'update'
+          },
+
+
+
+          success:function (json){
+              document.getElementById("cartQty").innerHTML = json.Qty
+              document.getElementById("totalId").innerHTML = json.total
+              document.getElementById("totalId2").innerHTML = json.total
+
+
+          },
+          error: function(xhr,errmsg,err){}
+      });
+console.log("akaakakskkkkdkakd")
+
+  });
 
 
 
