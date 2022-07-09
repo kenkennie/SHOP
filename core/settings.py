@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&4k+hh_+xxqzkeaen-b-z58o5^8!p7lp!s4mq%^*f^)sxz(o$%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
-ALLOWED_HOSTS = ['the-mega-shop.herokuapp.com']
+ALLOWED_HOSTS = ['the-mega-shop.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'cart',
-    'account'
+    'account',
+    'blog',
+    'ckeditor',
+    'mptt',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +70,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'store.context_processor.categories',  # categories views to be available in all pages
-                'cart.context_processor.cart'  # session can be requested in every page
+                'cart.context_processor.cart',  # session can be requested in every page
+                'blog.context_processor.blog_categories',
             ],
         },
     },

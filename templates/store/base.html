@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -21,6 +20,7 @@
     <link href="{% static 'assets/css/font-awesome.min.css' %}" rel="stylesheet">
     <!-- helper class css -->
     <link href="{% static 'assets/css/helper.min.css' %}" rel="stylesheet">
+
     <!-- Plugins CSS -->
     <link href="{% static 'assets/css/plugins.css' %}" rel="stylesheet">
     <!-- Main Style CSS -->
@@ -224,8 +224,12 @@
                                           <li><a href="#">shop </a>
                                              
                                           </li>
-                                          <li><a href="#">Blog</a>
-                                             
+                                          <li><a href="{% url 'blog:all_posts' %}">Blog <i class="fa fa-angle-down"></i></a>
+                                             <ul class="dropdown">
+                                                 {% for post_categories in blog_categories %}
+                                                    <li><a href="{{   post_categories.get_absolute_url }}">{{ post_categories.name }}</a></li>
+                                                 {% endfor %}
+                                             </ul>
                                           </li>
                                           <li><a href="contact-us.html">Contact us</a></li>
                                       </ul>
@@ -245,17 +249,14 @@
       <!-- header area end -->
 
 
-
-
-
       <!--content-->
-        {% block content %} {% endblock %}
+        {% block content %}
+
+        {% endblock %}
       <!--end content-->
 
-
-
-      
     <!--All jQuery, Third Party Plugins & Activation (main.js) Files-->
+        <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
     <script src="{% static 'assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
     <!-- Jquery Min Js -->
     <script src="{% static 'assets/js/vendor/jquery-3.5.1.min.js' %}"></script>
@@ -309,11 +310,11 @@
 
   });
 
-</script>
 
 
 
-<script>
+
+
   $(document).on('click','.deleteBtn','.deleteBtn2',function(e){
       // detect btn when clicked
       e.preventDefault();
@@ -386,10 +387,8 @@
           },
           error: function(xhr,errmsg,err){}
       });
-console.log("akaakakskkkkdkakd")
 
   });
-
 
 
 </script>
