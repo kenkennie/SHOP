@@ -1,0 +1,32 @@
+{% load static %}
+<div class="paginatoin-area text-center pt-30 pb-30">
+                            <div class="row">
+                                <div class="col-12">
+  {% if all_blogs.has_other_pages %}
+         <ul class="pagination-box">
+                {% if page.has_previous %}
+                    <li><a class="Previous" href="?page={{ page.previous_page_number }}">Previous</a></li>
+                {% else %}
+                    <li class="disabled"><span>Previous</span></li>
+                {% endif %}
+
+                {% for pages in page.paginator.page_range %}
+                    {% if page.number == pages %}
+                         <li class="active"><a href="#">{{ pages }}</a></li>
+                        {% else %}
+                             <li><a href="?page={{ pages}}">{{ pages }}</a></li>
+
+                    {% endif %}
+                {% endfor %}
+                        {% if page.has_next %}
+                            <li><a class="Next" href="?page={{ page.next_page_number }}">Next</a></li>
+                        {% else %}
+                                <li class="disabled"><span>Next</span></li>
+                        {% endif %}
+         </ul>
+
+  {% endif %}
+
+     </div>
+                            </div>
+                        </div>-->
